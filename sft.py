@@ -52,7 +52,7 @@ def main():
         num_train_epochs = 10, 
         learning_rate = 5e-5, 
         report_to = "swanlab", 
-        run_name=model_name,
+        run_name=f"{model_name}/sft",
         output_dir=f"/data/finetuning/tof/{model_name}/sft",
         completion_only_loss=True
     )
