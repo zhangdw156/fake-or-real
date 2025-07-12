@@ -1,0 +1,4 @@
+*.ipynb_checkpoints
+model/
+trainer_output/
+unsloth_compiled_cache/
