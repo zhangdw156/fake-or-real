@@ -1,0 +1,18 @@
+Your task: Compare Text 1 and Text 2, then determine which one is factually correct (true) and which has been modified (false).
+
+Text 1:
+<text1>
+{TEXT1}
+</text1>
+
+Text 2:
+<text2>
+{TEXT2}
+</text2>
+
+Evaluation criteria:
+- Check for factual accuracy
+- Verify logical consistency
+- Cross-reference with common knowledge
+
+IMPORTANT: Your final answer MUST be EITHER "1" OR "2". No explanations, comments, or additional information. Only the number.

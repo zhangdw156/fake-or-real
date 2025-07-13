@@ -37,6 +37,7 @@ def parse_args():
 
     parser.add_argument('--model_path', type=str,help='微调模型的路径')
     parser.add_argument('--lora_path', type=str,help='lora参数的路径')
+    parser.add_argument('--data_path', type=str,help='验证数据的路径')
     
     args = parser.parse_args()
 
@@ -47,6 +48,7 @@ def main():
     logger=prepare_logger()
     model_path=args.model_path
     lora_path=args.lora_path
+    data_path=args.data_path
     model_name=model_path.split('/')[-1]
     
     logger.info('***********************************************')
@@ -68,7 +70,7 @@ def main():
         return_all_scores=True,  # 返回所有类别的分数（0和1的概率）
     )
 
-    train_df=pd.read_json('data/train_text_labels.json',orient='records',lines=True)
+    train_df=pd.read_json(data_path,orient='records',lines=True)
     train_df['text'] = train_df['text'].replace('', ' ')  # 替换空字符串
     train_df_1=train_df[:95]
     train_df_2=train_df[95:]

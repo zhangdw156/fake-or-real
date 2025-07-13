@@ -4,6 +4,7 @@ from transformers import pipeline,AutoModelForCausalLM,AutoTokenizer
 from peft import PeftModel
 import logging
 import pandas as pd
+import time
 
 def prepare_logger():
     # 创建日志器
@@ -36,6 +37,12 @@ def parse_args():
 
     parser.add_argument('--model_path', type=str,help='微调模型的路径')
     parser.add_argument('--lora_path', type=str,help='lora参数的路径')
+    parser.add_argument('--data_path', type=str,help='验证数据的路径')
+    parser.add_argument('--no-lora', 
+                        action='store_false',
+                        dest='lora',
+                        help='禁用LoRA（默认启用）')
+    parser.set_defaults(lora=True)  # 默认启用LoRA
     
     args = parser.parse_args()
 
@@ -45,18 +52,20 @@ def main():
     args=parse_args()
     logger=prepare_logger()
     model_path=args.model_path
-    lora_path=args.lora_path
+    data_path=args.data_path
     model_name=model_path.split('/')[-1]
     
     logger.info('***********************************************')
     logger.info(f'微调的基础模型是{model_name}')
-    logger.info(f'lora所在的位置是{lora_path}')
+    logger.info(f'验证的数据是{data_path}')
     
     tokenizer=AutoTokenizer.from_pretrained(model_path)
     model=AutoModelForCausalLM.from_pretrained(model_path)
-
-    model=PeftModel.from_pretrained(model,lora_path)
-    model=model.merge_and_unload()
+    if args.lora:
+        lora_path=args.lora_path
+        logger.info(f'lora所在的位置是{lora_path}')
+        model=PeftModel.from_pretrained(model,lora_path)
+        model=model.merge_and_unload()
 
     generator = pipeline(
         task="text-generation",  # 指定任务类型
@@ -65,7 +74,7 @@ def main():
         tokenizer=tokenizer,
     )
 
-    train_data=pd.read_json('data/train_processed.json',orient='records',lines=True)
+    train_data=pd.read_json(data_path,orient='records',lines=True)
 
     train_data['text']=train_data.apply(
         lambda row:
@@ -79,9 +88,11 @@ def main():
             ),
         axis=1
     )
-
+    begin_time=time.time()
+    
     outputs=generator(train_data['text'].tolist())
-
+    
+    end_time=time.time()
     outputs=[row[0]['generated_text'][len(train_data.loc[idx,'text']):] for idx,row in enumerate(outputs)]
 
     train_data['predict']=outputs
@@ -89,6 +100,7 @@ def main():
     train_data['completion']=train_data['completion'].astype(str)
     accuracy = (train_data['predict'] == train_data['completion']).mean()
     logger.info(f"在训练集上的准确率为: {accuracy:.5f}")
+    logger.info(f"处理时间为: {(end_time-begin_time):.2f}s")
     logger.info('***********************************************')
 
 
