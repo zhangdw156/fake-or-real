@@ -1,5 +1,5 @@
-base_model="Qwen3-0.6B"
-job="merged-sft"
+base_model="Qwen3-8B"
+job="enhanced-sft"
 data_path="data/train_processed.json"
 
 source /home/fine/uv/transformers/bin/activate && \

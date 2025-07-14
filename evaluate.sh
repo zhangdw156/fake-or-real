@@ -1,4 +1,4 @@
-base_model='Qwen3-0.6B'
+base_model='Qwen3-8B'
 
 evaluate(){
     source /home/fine/uv/transformers/bin/activate && \

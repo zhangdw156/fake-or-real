@@ -37,6 +37,7 @@ def parse_args():
 
     parser.add_argument('--model_path', type=str,help='微调模型的路径')
     parser.add_argument('--lora_path', type=str,help='lora参数的路径')
+    parser.add_argument('--job_name', type=str,help='任务名称')
     
     args = parser.parse_args()
 
@@ -47,6 +48,7 @@ def main():
     logger=prepare_logger()
     model_path=args.model_path
     lora_path=args.lora_path
+    job_name=args.job_name
     model_name=model_path.split('/')[-1]
     
     logger.info('***********************************************')
@@ -66,7 +68,7 @@ def main():
         tokenizer=tokenizer,
     )
 
-    test_data=pd.read_csv('data/test_processed.csv')
+    test_data=pd.read_csv('data/test_processed2.csv')
     test_data['text']=test_data.apply(
         lambda row:
             tokenizer.apply_chat_template(
@@ -97,7 +99,7 @@ def main():
     
     test_data=test_data[['id','real_text_id']]
     
-    test_data.to_csv(f'data/submission_{model_name}_sft.csv',header=True,index=False)
+    test_data.to_csv(f'data/submission_{model_name}_{job_name}.csv',header=True,index=False)
 
 
 if __name__=='__main__':

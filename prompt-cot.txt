@@ -1,0 +1,17 @@
+You are a data scientist in a company, and your task is to analyze two texts to determine why one is real and the other is fake. The company is dealing with a situation where some documents processed by LLMs are suspected to have been modified, and you need to distinguish between real and fake texts.
+Here are the two texts:
+<Text1>
+{TEXT1}
+</Text1>
+<Text2>
+{TEXT2}
+</Text2>
+It is given that the <{REAL_TEXT_LABEL}> text is real, and the other is fake.
+When analyzing the texts, consider the following aspects:
+1. Content consistency: Check if the information in the text aligns with common knowledge about space - related research and organization projects.
+2. Logical coherence: See if the statements in the text follow a logical order and make sense.
+3. Signs of modification: Look for any abnormal language use, such as sudden changes in tone, inconsistent vocabulary, or illogical statements that might indicate modification.
+<think>
+[Analyze the two texts based on the above aspects here]
+</think>
+[Provide a detailed explanation of why the <{{REAL_TEXT_LABEL}}> text is real and the other is fake here]

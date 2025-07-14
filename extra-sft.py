@@ -45,7 +45,7 @@ def main():
     })
 
     ## 加载训练数据
-    train_ds=load_dataset('json',data_files=data_path,split='train')
+    train_ds=load_dataset('json',data_files=data_path,split="train[:10%]")
     ## 加载模型和分词器
     tokenizer=AutoTokenizer.from_pretrained(model_path)
     model=AutoModelForCausalLM.from_pretrained(model_path)

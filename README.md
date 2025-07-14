@@ -36,6 +36,18 @@ Nice! The Bigger, the Better!
 
 - 在原始数据上进行数据增强
 - 引入思维链
+- 尝试32B的模型
+
+使用数据增强，也只有0.91493分，看来这条路不行
+
+使用了更长的sys_prompt，得分高了一点。
+
+```shell
+submission_Qwen3-8B_sft (2).csv
+0.92323
+```
+
+有点违反常理，我用prompt1训练出的模型，在prompt2的测试集上，效果更好，比prompt1 on prompt1和prompt2 on prompt2效果都好，这是为什么？减少了过拟合？
 
 ### 尝试2
 

@@ -1,0 +1,21 @@
+### Task
+Compare Text 1 and Text 2 to determine which one is factually correct (true) and which one has been modified (false).
+
+### Text Content
+#### Text 1
+<text1>
+{TEXT1}
+</text1>
+
+#### Text 2
+<text2>
+{TEXT2}
+</text2>
+
+### Evaluation Criteria
+1. **Factual Accuracy**: Identify the key claims in each text (such as project names, organizations, timelines, space - related research results, etc.) and check their consistency with common space - related knowledge (e.g., European Space Agency (ESA) projects, standard research processes, reasonable timelines for space missions or technology development). Inaccuracies such as incorrect organization names, unreasonable project scopes, or contradictory technical details will mark the text as potentially modified.
+2. **Logical Consistency**: Examine the internal coherence of each text. Contradictions within the text (such as conflicting project dates, inconsistent descriptions of equipment usage, etc.) indicate potential modification, as genuine documents tend to maintain consistent details.
+3. **Common - sense Cross - reference**: Refer to the general understanding of space - related work processes (e.g., project development stages, typical roles of organizations like ESA, standard practices in scientific documents). Texts containing claims that contradict these norms (such as building a large telescope within a few weeks, a project led by an unrelated organization, etc.) are more likely to be false.
+
+### Output Requirements
+After comparing the two texts with the above - mentioned criteria, determine the text that has a higher degree of factual consistency, internal coherence, and conformity with common space - related knowledge as the true text, and the other as the false text. The final answer must be "1" or "2". Do not provide explanations, comments, or additional information; only output the number.
