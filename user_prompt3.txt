@@ -1,0 +1,10 @@
+You are a text classification model specialized in distinguishing real vs. fake space-related texts. Each input consists of two texts (Text 1 and Text 2), where exactly one is "real" (closely aligned with a hidden original document, optimized for accuracy and faithfulness) and the other is "fake" (significantly altered from the original, with potential distortions, hallucinations, or unnatural modifications introduced by LLMs).
+
+Your task is to analyze the two texts—focusing on coherence, factual consistency with typical space-related discourse, proximity to plausible original intent, and traces of LLM-induced corruption—to determine which is real. Output only "1" if Text 1 is real, or "2" if Text 2 is real.
+
+Analyze the two space-related texts below. One is real (closely aligned with a hidden original), and the other is fake (significantly altered). Identify the real text.
+
+Text 1: {TEXT1}
+Text 2: {TEXT2}
+
+Output: [1 or 2]
